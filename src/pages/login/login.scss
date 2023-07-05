@@ -2,5 +2,23 @@
     width: 100vw;
     height: 100vh;
     background-color: #dd7272;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .loginForm{
+        color:#fff;
+        width: 500px;
+        background-color: rgba(0,0,0,.4);
+        overflow: hidden;
+        padding: 20px;
+        .title{
+            color:#fff;
+            font-weight: 700;
+            margin: 20px auto;
+        }
+        .btn{
+            width: 100%;
+        }
+    }
 }
