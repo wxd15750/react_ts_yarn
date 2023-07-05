@@ -14,19 +14,19 @@ export default function Login() {
   const onFinish = (values: any) => {
     console.log('Success:', values);
     setLoading(true)
+    console.log(loading);
+    
   };
 
   return (
     <div className='loginContainer'>
+    
       <div className='loginForm'>
         <h1 className='title'>React+ts后台管理系统</h1>
         <Form
-            name="basic"
-            // labelCol={{ span: 6}}
-            // wrapperCol={{ span: 16 }}
-            // initialValues={{ remember: true }}
-            onFinish={onFinish}
-            autoComplete="off"
+          name="basic"
+          onFinish={onFinish}
+          autoComplete="off"
           >
             <Form.Item
               name="username"
