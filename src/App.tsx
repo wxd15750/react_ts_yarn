@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider} from 'antd';
 // 国际化
 import zhCN from 'antd/locale/zh_CN';
 
@@ -7,6 +7,7 @@ import zhCN from 'antd/locale/zh_CN';
 import router from './routes/route';
 
 import {useRoutes,Link} from 'react-router-dom'
+import Layouts from './layout';
 
 function App() {
 
@@ -16,9 +17,10 @@ function App() {
 
   return (
     <div className="App">
-      <ConfigProvider theme={{ token: { colorPrimary: '#71c3f3' } }} locale={zhCN}>
+      {/* <ConfigProvider theme={{ token: { colorPrimary: '#71c3f3' } }} locale={zhCN}>
         {outlet}
-      </ConfigProvider>
+      </ConfigProvider> */}
+      <Layouts></Layouts>
         
       
     </div>

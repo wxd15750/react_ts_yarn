@@ -5,6 +5,8 @@ import App from './App';
 // 清空默认样式
 import '@/styles/reset.scss'
 
+import "@/styles/global.scss"
+
 // 导入路由的实列方法
 import {BrowserRouter} from 'react-router-dom'
 
