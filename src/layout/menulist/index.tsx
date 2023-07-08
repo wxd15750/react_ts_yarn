@@ -1,57 +1,96 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import {Layout, Menu } from 'antd';
+import {Layout, Menu, MenuProps } from 'antd';
 
-import {
+// import {
+//   DesktopOutlined,
+//   FileOutlined,
+//   PieChartOutlined,
+//   TeamOutlined,
+//   UserOutlined,
+// } from '@ant-design/icons';
 
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
 import Logo from '../logo';
+import { findSideBarRoutes } from '@/routes/route';
+import { SRoutes } from '@/routes/type';
+import { useNavigate } from 'react-router-dom';
+import { join } from 'path';
 
-// 获取路由
+
+
+
+type MenuItem = Required<MenuProps>["items"][number];
+
+function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode, children?: MenuItem[], type?: "group"): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  } as MenuItem;
+}
+
+interface MenuInfo {
+  key: string;
+  keyPath: string[];
+  /** @deprecated This will not support in future. You should avoid to use this */
+  item: React.ReactInstance;
+  domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
+}
 
 const { Sider } = Layout;
-
 
 
 export default function MenuList() {
 
   const [collapsed, setCollapsed] = useState(false);
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
-  const toPath = (e:any) => {
-    console.log(e);
+  const navigate = useNavigate()
+  const routes = findSideBarRoutes() as SRoutes;
+
+  const items: MenuItem[] = routes?.map((route)=>{
+    return getItem(
+      route.meta?.title,
+      route.path as string,
+      route.meta?.icon,
+      route.children
+        ?.map((item) => {
+          if (item.hidden) return null;
+          return getItem(item.meta?.title, item.path as string, item.meta?.icon);
+        })
+        .filter(Boolean)
+    )
+  })
+  
+  const handleMenuClick = ({key}:MenuInfo) => {
+    navigate(key)
 
   }
+
+
+  const onCollapse = (collapsed: boolean) => {
+    setCollapsed(collapsed);
+  };
+
+  const handleOpenChange = (openKeys: string[]) => {
+    setOpenKeys(openKeys);
+  };
   
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
+    <Sider style={{overflow:"auto"}} collapsible collapsed={collapsed} onCollapse={onCollapse} breakpoint="lg">
         <Logo></Logo>
+        <Menu 
         
-        <Menu
-          theme="dark"
-          mode="inline"
-          onClick={toPath}
-          defaultSelectedKeys={['1']}
-          items={[
-            {
-              key: '/home',
-              icon: <UserOutlined />,
-              label: 'nav 1',
-            },
-            {
-              key: '/login',
-              icon: <VideoCameraOutlined />,
-              label: 'nav 2',
-            },
-            {
-              key: '/404',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
-            },
-          ]}
-        />
-      </Sider>
+        theme="dark" 
+        mode="inline" 
+        openKeys={openKeys}
+        selectedKeys={selectedKeys}
+        onClick={handleMenuClick}
+        onOpenChange={handleOpenChange}
+        items={items} />
+    </Sider>
   )
 }

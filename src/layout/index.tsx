@@ -6,7 +6,7 @@ import ShowContent from './content'
 
 export default function Layouts() {
   return (
-    <Layout>
+    <Layout style={{overflow:"hidden"}}>
       <MenuList></MenuList>
 
       <Layout>

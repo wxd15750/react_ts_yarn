@@ -1,31 +1,186 @@
-import {Navigate} from 'react-router-dom'
+import Layouts from '@/layout'
+import { FC, Suspense, lazy } from 'react'
+import {Navigate,useRoutes} from 'react-router-dom'
 
-import Login from "@/pages/login"
-import Home from "@/pages/home"
-import NotFound from "@/pages/404"
 
-const router = [
+// 懒加载
+import { HomeOutlined } from '@ant-design/icons';
+import { SRoutes } from './type';
+const Home = lazy(()=>import('@/pages/home'));
+const Login = lazy(()=>import('@/pages/login'));
+const NotFound = lazy(()=>import('@/pages/404'));
+
+// 定义懒加载函数
+const load = (Com:FC) => {
+    return (<Suspense fallback={<div>...加载中</div>}>
+        <Com></Com>
+    </Suspense>)
+}
+
+const routes:SRoutes = [
+    // 登录页路由
     {
         path:'/',
-        element:<Navigate to="/home"></Navigate>
+        element:load(Login),
+        children:[
+            {
+                path:"login",
+                element:load(Login)
+            }
+        ],
+        
     },
+    // 首页路由
     {
-        path:'/home',
-        element:<Home></Home>
-    },
-    {
-        path:'/login',
-        element:<Login></Login>
-    },
-    {
-        path:'/*',
-        element:<Navigate to="/404"></Navigate>
-    },
-    {
-        path:'/404',
-        element:<NotFound></NotFound>
+        path:'/react',
+        element:<Layouts/>,
+        
+        children:[
+            {
+                path:"/react/home",
+                meta:{
+                    icon:<HomeOutlined />,
+                    title:'首页',
+                },
+                element:load(Home),
+            },
+            {
+                path:'/react/product1',
+                meta:{
+                    icon:<HomeOutlined />,
+                    title:'商品管理'
+                },
+                children:[
+                    
+                    {
+                        path: "/react/product1/index123",
+                        meta: { icon: <HomeOutlined />, title: "首页" },
+                        element: load(Home),
+                    },
+                    {
+                        path: "/react/product1/index444",
+                        meta: { icon: <HomeOutlined />, title: "首页" },
+                        element: load(Home),
+                    },
+                    {
+                        path: "/react/product1/555",
+                        meta: { icon: <HomeOutlined />, title: "用户管理" },
+                        element: load(Home),
+                    },
+                    
+                    
+                ]
+            },
+            {
+                path:'/react/product2',
+                meta:{
+                    icon:<HomeOutlined />,
+                    title:'商品管理'
+                },
+                children:[
+                    
+                    {
+                        path: "/react/product2/index123",
+                        meta: { icon: <HomeOutlined />, title: "首页" },
+                        element: load(Home),
+                    },
+                    {
+                        path: "/react/product2/index444",
+                        meta: { icon: <HomeOutlined />, title: "首页" },
+                        element: load(Home),
+                    },
+                    {
+                        path: "/react/product2/555",
+                        meta: { icon: <HomeOutlined />, title: "用户管理" },
+                        element: load(Home),
+                    },
+                    
+                    
+                ]
+            },
+            {
+                path:'/react/product3',
+                meta:{
+                    icon:<HomeOutlined />,
+                    title:'商品管理'
+                },
+                children:[
+                    
+                    {
+                        path: "/react/product3/index123",
+                        meta: { icon: <HomeOutlined />, title: "首页" },
+                        element: load(Home),
+                    },
+                    {
+                        path: "/react/product3/index444",
+                        meta: { icon: <HomeOutlined />, title: "首页" },
+                        element: load(Home),
+                    },
+                    {
+                        path: "/react/product3/555",
+                        meta: { icon: <HomeOutlined />, title: "用户管理" },
+                        element: load(Home),
+                    },
+                    
+                    
+                ]
+            },
+            {
+                path:'/react/product4',
+                meta:{
+                    icon:<HomeOutlined />,
+                    title:'商品管理'
+                },
+                children:[
+                    
+                    {
+                        path: "/react/product4/index123",
+                        meta: { icon: <HomeOutlined />, title: "首页" },
+                        element: load(Home),
+                    },
+                    {
+                        path: "/react/product4/index444",
+                        meta: { icon: <HomeOutlined />, title: "首页" },
+                        element: load(Home),
+                    },
+                    {
+                        path: "/react/product4/555",
+                        meta: { icon: <HomeOutlined />, title: "用户管理" },
+                        element: load(Home),
+                    },
+                    
+                    
+                ]
+            },
+        ]
     },
     
-]
+    {
+        path: "/404",
+        element: load(NotFound),
+       
+    },
+    
+    {
+        path: "*", // 任意路径：除了上面路径以外其他路径
+        element: <Navigate to="/404" />,
+        
+    },
+];
 
-export default router
+
+/* 
+自定义hook: 注册应用的所有路由
+*/
+export const useAppRoutes = () => {
+    return useRoutes(routes);
+  };
+
+// 找到要渲染成左侧菜单的路由
+export const findSideBarRoutes = () => {
+    const currentIndex = routes.findIndex((route) => route.path === "/react");
+    return routes[currentIndex].children as SRoutes;
+  };
+
+
+export default routes;

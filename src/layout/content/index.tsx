@@ -1,10 +1,13 @@
 import React from 'react'
 
-import { Button, Layout, Menu, theme } from 'antd';
+import { Layout } from 'antd';
+import { Outlet } from 'react-router-dom';
 
-const { Header, Sider, Content } = Layout;
+const { Content } = Layout;
+
 
 export default function ShowContent() {
+  
   return (
     <Content
           style={{
@@ -14,7 +17,7 @@ export default function ShowContent() {
             background: "#fff",
           }}
         >
-          Content
+          <Outlet />
         </Content>
   )
 }
