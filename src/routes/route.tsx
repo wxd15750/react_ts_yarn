@@ -12,7 +12,7 @@ const NotFound = lazy(() => import("@/pages/404"));
 // 定义懒加载函数
 const load = (Com: FC) => {
   return (
-    <Suspense fallback={<div>...加载中</div>}>
+    <Suspense fallback={<div>加载中...</div>}>
       <Com></Com>
     </Suspense>
   );

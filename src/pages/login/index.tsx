@@ -23,10 +23,11 @@ export default function Login() {
     if (res.code === 20000) {
       const { token } = res.data;
       SET_TOKEN(token);
+      const { username } = values;
 
       navigate("/home");
       notification.success({
-        description: `HI,${getTime()}好 `,
+        description: `HI,${getTime()}好 ,${username}`,
         message: "登录成功",
         duration: 3,
         type: "success",
