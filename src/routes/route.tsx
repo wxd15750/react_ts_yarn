@@ -29,15 +29,11 @@ const routes: SRoutes = [
         element: load(Login),
       },
     ],
+    hidden: true,
   },
   // 首页路由
   {
     path: "/home",
-
-    meta: {
-      icon: <HomeOutlined />,
-      title: "首页",
-    },
     element: <Layouts></Layouts>,
     children: [
       {
@@ -45,16 +41,53 @@ const routes: SRoutes = [
         element: load(Home),
       },
     ],
+    meta: {
+      icon: <HomeOutlined />,
+      title: "首页",
+    },
+    hidden: false,
+  },
+  // screen
+  {
+    path: "/screen",
+    element: <Layouts></Layouts>,
+    meta: {
+      icon: <HomeOutlined />,
+      title: "数据大屏",
+    },
+    children: [
+      {
+        path: "/screen1",
+        element: load(Home),
+        meta: {
+          title: "水晶球",
+          icon: <HomeOutlined />,
+        },
+        hidden: false,
+      },
+      {
+        path: "/screen2",
+        element: load(Home),
+        meta: {
+          title: "折线图",
+          icon: <HomeOutlined />,
+        },
+        hidden: false,
+      },
+    ],
+    hidden: false,
   },
 
   {
     path: "/404",
     element: load(NotFound),
+    hidden: true,
   },
 
   {
     path: "*", // 任意路径：除了上面路径以外其他路径
     element: <Navigate to="/404" />,
+    hidden: true,
   },
 ];
 
@@ -66,9 +99,8 @@ export const useAppRoutes = () => {
 };
 
 // 找到要渲染成左侧菜单的路由
-// export const findSideBarRoutes = () => {
-//   const currentIndex = routes.findIndex((route) => route.path === "/react");
-//   return routes[currentIndex].children as SRoutes;
-// };
+export const findSideBarRoutes = () => {
+  return routes.filter((route) => route.hidden === false);
+};
 
 export default routes;
