@@ -1,0 +1,33 @@
+.layoutContainer{
+    width: 100vw;
+    height: 100vh;
+    // background-color: #e77777;
+    display: flex;
+    color:#fff;
+    overflow: hidden;
+    .leftMenu{
+        width: 240px;
+        height: 100vh;
+        background-color: #040b22;
+    }
+    .right{
+        flex:1;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        .tabbar{
+            width: 100%;
+            height: 60px;
+            padding-left:20px;
+            background-color: #fdecec;
+        }
+        .contents{
+            margin-left:20px;
+            width: 100%;
+            margin-top: 20px;
+            height: calc(100vh - 80px) ;
+            background-color: #84dda1;
+            flex: 1;
+        }
+    }
+}
