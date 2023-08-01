@@ -1,25 +1,27 @@
 .layoutContainer{
     width: 100vw;
     height: 100vh;
-    // background-color: #e77777;
     display: flex;
     color:#fff;
     overflow: hidden;
+    
     .leftMenu{
         width: 240px;
-        height: 100vh;
         background-color: #040b22;
         .demo-logo-vertical{
+            box-sizing: border-box;
             height: 40px;
             margin: 10px ;
             background-color: #9799a1;
         }
+        overflow-x: hidden;
+
     }
     .right{
         flex:1;
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
+        overflow-x: hidden;
         .tabbar{
             width: 100%;
             height: 60px;
@@ -28,12 +30,41 @@
             }
         }
         .contents{
-            margin-left:20px;
-            width: 100%;
-            margin-top: 20px;
-            height: calc(100vh - 80px) ;
+            margin:20px;
+            width: calc(100vw - 280px);
+            height: calc(100vh - 140px) ;
             background-color: #84dda1;
             flex: 1;
         }
+        .footer{
+            height: 40px
+        }
     }
 }
+
+.right::-webkit-scrollbar {
+    width: 6px;
+}
+.right::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    // 滚动条的颜色
+    background: rgba(72, 121, 75);
+}
+.right::-webkit-scrollbar-track {
+    border-radius: 0;
+    // 滚动条插槽的颜色
+    background: rgba(0,0,0,0.1);
+}
+
+.leftMenu::-webkit-scrollbar {
+    width: 6px;
+}
+.leftMenu::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgb(123, 211, 127);
+}
+.leftMenu::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: rgba(123, 211, 127,0.5);
+}
+

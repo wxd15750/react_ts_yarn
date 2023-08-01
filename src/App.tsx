@@ -8,7 +8,10 @@ import zhCN from "antd/locale/zh_CN";
 import { useRoutes } from "react-router-dom";
 
 import routes from "./routes/route";
+// 清空默认样式
+import "@/styles/reset.scss";
 
+import "@/styles/global.scss";
 function App() {
   // 使用路由
   const outlet = useRoutes(routes);

@@ -6,6 +6,10 @@ import type { MenuProps } from "antd";
 import { findSideBarRoutes } from "@/routes/route";
 import { SRoute } from "@/routes/type";
 import { useLocation, useNavigate } from "react-router-dom";
+
+// 引入样式
+import "./leftMenu.scss";
+
 type MenuItem = Required<MenuProps>["items"][number];
 
 // interface MenuInfo {
@@ -91,7 +95,7 @@ export default function LeftMenu() {
   }
 
   return (
-    <>
+    <div className="leftMenus">
       <Sider
         trigger={null}
         collapsible
@@ -105,6 +109,7 @@ export default function LeftMenu() {
         <Menu
           theme="dark"
           mode="inline"
+          style={{ height: "100vh" }}
           defaultSelectedKeys={[currentRoute.pathname]}
           onClick={selectPath}
           items={items}
@@ -114,6 +119,6 @@ export default function LeftMenu() {
           openKeys={openmenu}
         />
       </Sider>
-    </>
+    </div>
   );
 }

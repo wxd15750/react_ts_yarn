@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu, Button, theme } from "antd";
 // 引入样式文件
 import "./layout.scss";
 import Contents from "./components/contents";
 import LeftMenu from "./components/leftMenu";
 import Tabbar from "./components/tabbar";
-const { Header, Sider, Content } = Layout;
+import Footers from "./components/footer";
 
 export default function Layouts() {
   return (
@@ -30,6 +22,9 @@ export default function Layouts() {
           </div>
           <div className="contents">
             <Contents></Contents>
+          </div>
+          <div className="footer">
+            <Footers></Footers>
           </div>
         </div>
       </div>
