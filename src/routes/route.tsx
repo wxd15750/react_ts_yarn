@@ -8,6 +8,8 @@ import Layouts from "@/layout";
 const Home = lazy(() => import("@/pages/home"));
 const Login = lazy(() => import("@/pages/login"));
 const NotFound = lazy(() => import("@/pages/404"));
+const Screen1 = lazy(() => import("@/pages/screen/screen1"));
+const Screen2 = lazy(() => import("@/pages/screen/screen2"));
 
 // 定义懒加载函数
 const load = (Com: FC) => {
@@ -57,8 +59,8 @@ const routes: SRoutes = [
     },
     children: [
       {
-        path: "/screen1",
-        element: load(Home),
+        path: "/screen/screen1",
+        element: load(Screen1),
         meta: {
           title: "水晶球",
           icon: <HomeOutlined />,
@@ -66,8 +68,8 @@ const routes: SRoutes = [
         hidden: false,
       },
       {
-        path: "/screen2",
-        element: load(Home),
+        path: "/screen/screen2",
+        element: load(Screen2),
         meta: {
           title: "折线图",
           icon: <HomeOutlined />,

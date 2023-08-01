@@ -1,4 +1,5 @@
 import { Layout } from "antd";
+import { Outlet } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -9,7 +10,7 @@ export default function Contents() {
         minHeight: 280,
       }}
     >
-      Content
+      <Outlet></Outlet>
     </Content>
   );
 }

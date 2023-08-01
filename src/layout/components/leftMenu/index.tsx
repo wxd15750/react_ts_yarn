@@ -5,7 +5,21 @@ import { Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { findSideBarRoutes } from "@/routes/route";
 import { SRoute } from "@/routes/type";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 type MenuItem = Required<MenuProps>["items"][number];
+
+interface MenuInfo {
+  key: string;
+  keyPath: string[];
+  /** @deprecated This will not support in future. You should avoid to use this */
+  item: React.ReactInstance;
+  domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
+}
 
 const { Sider } = Layout;
 export default function LeftMenu() {
@@ -48,6 +62,14 @@ export default function LeftMenu() {
     );
   });
 
+  // 编程式导航
+  const navigate = useNavigate();
+  // const [pathname, setPathname] = useState<string>();
+  // 路由菜单的点击
+  const selectPath = (e: { key: string }) => {
+    navigate(e.key);
+  };
+
   return (
     <>
       <Sider
@@ -64,6 +86,7 @@ export default function LeftMenu() {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
+          onClick={selectPath}
           items={items}
         />
       </Sider>
