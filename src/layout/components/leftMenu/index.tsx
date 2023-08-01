@@ -8,13 +8,13 @@ import { SRoute } from "@/routes/type";
 import { useLocation, useNavigate } from "react-router-dom";
 type MenuItem = Required<MenuProps>["items"][number];
 
-interface MenuInfo {
-  key: string;
-  keyPath: string[];
-  /** @deprecated This will not support in future. You should avoid to use this */
-  item: React.ReactInstance;
-  domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
-}
+// interface MenuInfo {
+//   key: string;
+//   keyPath: string[];
+//   /** @deprecated This will not support in future. You should avoid to use this */
+//   item: React.ReactInstance;
+//   domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
+// }
 
 const { Sider } = Layout;
 export default function LeftMenu() {
@@ -39,10 +39,12 @@ export default function LeftMenu() {
   }
 
   const routesList = findSideBarRoutes() as SRoute[];
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // console.log(routesList[0].children);
+  }, []);
   // 整理路由相关
 
-  const items: MenuItem[] = routesList.map((item) => {
+  const items: MenuItem[] = routesList[0].children!.map((item) => {
     return getItem(
       item.meta?.title,
       item.path,

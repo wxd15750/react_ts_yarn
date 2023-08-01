@@ -33,51 +33,51 @@ const routes: SRoutes = [
     ],
     hidden: true,
   },
-  // 首页路由
   {
-    path: "/home",
+    path: "/syst",
     element: <Layouts></Layouts>,
     children: [
+      // 首页路由
       {
-        path: "/home",
+        path: "home",
         element: load(Home),
-      },
-    ],
-    meta: {
-      icon: <HomeOutlined />,
-      title: "首页",
-    },
-    hidden: false,
-  },
-  // screen
-  {
-    path: "/screen",
-    element: <Layouts></Layouts>,
-    meta: {
-      icon: <HomeOutlined />,
-      title: "数据大屏",
-    },
-    children: [
-      {
-        path: "/screen/screen1",
-        element: load(Screen1),
         meta: {
-          title: "水晶球",
           icon: <HomeOutlined />,
+          title: "首页",
         },
         hidden: false,
       },
+
+      // screen
       {
-        path: "/screen/screen2",
-        element: load(Screen2),
+        path: "/syst/screen",
         meta: {
-          title: "折线图",
           icon: <HomeOutlined />,
+          title: "数据大屏",
         },
+        children: [
+          {
+            path: "/syst/screen/screen1",
+            element: load(Screen1),
+            meta: {
+              title: "水晶球",
+              icon: <HomeOutlined />,
+            },
+            hidden: false,
+          },
+          {
+            path: "/syst/screen/screen2",
+            element: load(Screen2),
+            meta: {
+              title: "折线图",
+              icon: <HomeOutlined />,
+            },
+            hidden: false,
+          },
+        ],
         hidden: false,
       },
     ],
-    hidden: false,
   },
 
   {
@@ -102,7 +102,11 @@ export const useAppRoutes = () => {
 
 // 找到要渲染成左侧菜单的路由
 export const findSideBarRoutes = () => {
-  return routes.filter((route) => route.hidden === false);
+  return routes.filter((route) => {
+    if (route.path === "/syst") {
+      return route.children;
+    }
+  });
 };
 
 export default routes;
