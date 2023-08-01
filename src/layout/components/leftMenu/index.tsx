@@ -5,12 +5,7 @@ import { Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { findSideBarRoutes } from "@/routes/route";
 import { SRoute } from "@/routes/type";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 type MenuItem = Required<MenuProps>["items"][number];
 
 interface MenuInfo {
@@ -64,18 +59,34 @@ export default function LeftMenu() {
 
   // 编程式导航
   const navigate = useNavigate();
+  // 默认选中的项目
+  // 获取地址栏参数
+  const currentRoute = useLocation();
   // const [pathname, setPathname] = useState<string>();
   // 路由菜单的点击
   const selectPath = (e: { key: string }) => {
     navigate(e.key);
   };
 
+  // 刷新展开当前项
+  let findOpenKey: string = "";
+
   // 当前展开项
-  const [openmenu, setOpenmenu] = useState([""]); //true
+  const [openmenu, setOpenmenu] = useState([findOpenKey]); //true
 
   const handleOpenChange = (keys: string[]) => {
     setOpenmenu([keys[keys.length - 1]]);
   };
+
+  function findKey(obj: any) {
+    return obj.key === currentRoute.pathname;
+  }
+  for (let i = 0; i < items.length; i++) {
+    if (items[i]!["children"] && items[i]!["children"].find(findKey)) {
+      findOpenKey = items[i]!.key as string;
+      break;
+    }
+  }
 
   return (
     <>
@@ -92,7 +103,7 @@ export default function LeftMenu() {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["/home"]}
+          defaultSelectedKeys={[currentRoute.pathname]}
           onClick={selectPath}
           items={items}
           // 某项菜单展开和回收的事件
