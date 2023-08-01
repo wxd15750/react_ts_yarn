@@ -9,7 +9,7 @@ export default function Tabbar() {
   return (
     <>
       <Header style={{ padding: 0 }}>
-        <Button
+        {/* <Button
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
@@ -18,7 +18,14 @@ export default function Tabbar() {
             width: 64,
             height: 64,
           }}
-        />
+        /> */}
+        <div style={{ paddingLeft: "20px" }}>
+          {collapsed ? (
+            <MenuUnfoldOutlined onClick={() => setCollapsed(!collapsed)} />
+          ) : (
+            <MenuFoldOutlined onClick={() => setCollapsed(!collapsed)} />
+          )}
+        </div>
       </Header>
     </>
   );
