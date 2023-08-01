@@ -70,6 +70,13 @@ export default function LeftMenu() {
     navigate(e.key);
   };
 
+  // 当前展开项
+  const [openmenu, setOpenmenu] = useState([""]); //true
+
+  const handleOpenChange = (keys: string[]) => {
+    setOpenmenu([keys[keys.length - 1]]);
+  };
+
   return (
     <>
       <Sider
@@ -85,9 +92,13 @@ export default function LeftMenu() {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["/home"]}
           onClick={selectPath}
           items={items}
+          // 某项菜单展开和回收的事件
+          onOpenChange={handleOpenChange}
+          // 当前展开的项目
+          openKeys={openmenu}
         />
       </Sider>
     </>
