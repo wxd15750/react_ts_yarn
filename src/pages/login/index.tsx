@@ -25,7 +25,7 @@ export default function Login() {
       SET_TOKEN(token);
       const { username } = values;
 
-      navigate("/home");
+      navigate("/syst/home");
       notification.success({
         description: `HI,${getTime()}好 ,${username}`,
         message: "登录成功",
