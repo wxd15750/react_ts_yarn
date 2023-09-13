@@ -8,6 +8,7 @@ import Layouts from "@/layout";
 const Home = lazy(() => import("@/pages/home"));
 const Login = lazy(() => import("@/pages/login"));
 const NotFound = lazy(() => import("@/pages/404"));
+const Test = lazy(() => import("@/pages/test"));
 const Screen1 = lazy(() => import("@/pages/screen/screen1"));
 const Screen2 = lazy(() => import("@/pages/screen/screen2"));
 
@@ -76,6 +77,22 @@ const routes: SRoutes = [
           },
         ],
         hidden: false,
+      },
+      // 测试
+      {
+        path: "test",
+        element: load(Test),
+        meta: {
+          title: "测试",
+        },
+      },
+      //权限管理
+      {
+        path: "acl",
+        element: load(Test),
+        meta: {
+          title: "权限管理",
+        },
       },
     ],
   },

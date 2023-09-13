@@ -68,7 +68,6 @@ export default function LeftMenu() {
   // 默认选中的项目
   // 获取地址栏参数
   const currentRoute = useLocation();
-  // const [pathname, setPathname] = useState<string>();
   // 路由菜单的点击
   const selectPath = (e: { key: string }) => {
     navigate(e.key);
@@ -95,7 +94,10 @@ export default function LeftMenu() {
   }
 
   return (
-    <div className="leftMenus">
+    <div
+      className="leftMenus"
+      style={{ width: `collapsed ? ${80}+px : ${240}+px` }}
+    >
       <Sider
         trigger={null}
         collapsible
