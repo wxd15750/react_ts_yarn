@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Button } from "antd";
+import { showall, store } from "@/redux/store";
 const { Header } = Layout;
 
 export default function Tabbar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
+  const isToggle = () => {
+    store.dispatch(showall(collapsed));
+    setCollapsed(store.getState().isShow);
+    console.log(store.getState().isShow);
+  };
 
   return (
     <>
@@ -20,10 +26,10 @@ export default function Tabbar() {
           }}
         /> */}
         <div style={{ paddingLeft: "20px" }}>
-          {collapsed ? (
-            <MenuUnfoldOutlined onClick={() => setCollapsed(!collapsed)} />
+          {store.getState().isShow ? (
+            <MenuUnfoldOutlined onClick={isToggle} />
           ) : (
-            <MenuFoldOutlined onClick={() => setCollapsed(!collapsed)} />
+            <MenuFoldOutlined onClick={isToggle} />
           )}
         </div>
       </Header>
